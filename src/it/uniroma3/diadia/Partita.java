@@ -51,6 +51,10 @@ public class Partita {
 	public void setCfu(int cfu) {
 		this.giocatore.setCfu(cfu);		
 	}	
+	
+	public Giocatore getGiocatore() {
+		return this.giocatore;
+	}
 	public boolean mettiInBorsa(Attrezzo attrezzo) {
 		return this.giocatore.getBorsa().addAttrezzo(attrezzo);
 	}
