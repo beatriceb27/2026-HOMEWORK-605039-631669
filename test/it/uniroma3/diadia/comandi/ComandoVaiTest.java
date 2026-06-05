@@ -5,28 +5,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.IOConsole; // O qualsiasi IO fittizio tu stia usando
-
+import it.uniroma3.diadia.ambienti.Labirinto;
 public class ComandoVaiTest {
 
 	private Partita partita;
-	private Stanza stanzaPartenza;
-	private Stanza stanzaArrivo;
 	private ComandoVai comando;
-
 	@BeforeEach
-	public void setUp() {
-		this.partita = new Partita();
-		this.stanzaPartenza = new Stanza("Partenza");
-		this.stanzaArrivo = new Stanza("Arrivo");
-		
-		this.stanzaPartenza.impostaStanzaAdiacente("nord", stanzaArrivo);
-		this.partita.setStanzaCorrente(stanzaPartenza);
-		
-		this.comando = new ComandoVai();
-		this.comando.setIo(new IOConsole()); 
-	}
+    public void setUp() {
+		Labirinto bilocale = Labirinto.newBuilder()
+                .addStanzaIniziale("Atrio")
+                .addStanza("Biblioteca")
+                .addAdiacenza("Atrio", "Biblioteca", "nord")
+                .getLabirinto();
+                
+        this.partita = new Partita(bilocale);
+        this.comando = new ComandoVai();
+    }
 
 	@Test
 	public void testEsegui_DirezioneValida() {

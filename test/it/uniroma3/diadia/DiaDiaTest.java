@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+
 public class DiaDiaTest {
 
     @Test
@@ -76,7 +78,6 @@ public class DiaDiaTest {
 
     @Test
     public void testPartita_Vittoria() {
-        // NOTA: Inserisci le direzioni giuste per arrivare alla tua stanza vincente
         String[] comandiDaEseguire = {"vai nord", "vai est", "fine"}; 
         
         IOsimulator io = new IOsimulator(comandiDaEseguire);
@@ -119,5 +120,28 @@ public class DiaDiaTest {
         String logPartita = outputCompleto.toString();
         
         assertTrue(logPartita.contains("Hai esaurito i CFU..."));
+    }
+    @Test
+    public void testPartitaVinta_Bilocale() {
+    	Labirinto bilocale = Labirinto.newBuilder()
+                .addStanzaIniziale("Atrio")
+                .addStanzaVincente("Biblioteca")
+                .addAdiacenza("Atrio", "Biblioteca", "nord")
+                .getLabirinto();
+        
+        IOsimulator io = new IOsimulator("vai nord");
+        
+        DiaDia gioco = new DiaDia(bilocale, io);
+        gioco.gioca();
+        
+        boolean haVinto = false;
+        while (io.hasNextMessaggio()) {
+            String messaggio = io.nextMessaggio();
+            if (messaggio != null && (messaggio.contains("vinto") || messaggio.contains("Vittoria"))) {
+                haVinto = true;
+            }
+        }
+        
+        assertTrue(haVinto, "La partita non è stata vinta spostandosi a nord!");
     }
 }

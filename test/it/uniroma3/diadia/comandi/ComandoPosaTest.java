@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.IOConsole;
 
 public class ComandoPosaTest {
 
@@ -16,10 +16,16 @@ public class ComandoPosaTest {
 
     @BeforeEach
     public void setUp() {
-        this.partita = new Partita();
+    	Labirinto monolocale = Labirinto.newBuilder()
+                .addStanzaIniziale("Atrio")
+                .addStanzaVincente("Atrio") 
+                .getLabirinto();
+                
+        this.partita = new Partita(monolocale);
         this.comando = new ComandoPosa();
-        this.comando.setIo(new IOConsole());
-        this.attrezzo = new Attrezzo("osso", 2);
+        
+        Attrezzo osso = new Attrezzo("osso", 2);
+        this.partita.getGiocatore().getBorsa().addAttrezzo(osso);
     }
 
     @Test

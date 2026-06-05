@@ -5,15 +5,15 @@ public class StanzaBloccata extends Stanza {
     private String direzioneBloccata;
     private String attrezzoSbloccante;
 
-    public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccante) {
+    public StanzaBloccata(String nome, Direzione direzione, String nomeAttrezzo) {
         super(nome);
-        this.direzioneBloccata = direzioneBloccata;
-        this.attrezzoSbloccante = attrezzoSbloccante;
+        this.direzioneBloccata = direzione.name(); 
+        this.attrezzoSbloccante = nomeAttrezzo;
     }
 
     @Override
-    public Stanza getStanzaAdiacente(String direzione) {
-        if (direzione.equals(this.direzioneBloccata) && !this.hasAttrezzo(this.attrezzoSbloccante)) {
+    public Stanza getStanzaAdiacente(Direzione direzione) {
+        if (direzione.name().equalsIgnoreCase(this.direzioneBloccata) && !this.hasAttrezzo(this.attrezzoSbloccante)) {
             return this;
         }
         

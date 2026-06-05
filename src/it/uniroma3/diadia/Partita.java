@@ -11,22 +11,22 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @see Stanza
  * @version base
  */
-
+	
 public class Partita {
 
-	private boolean finita;
-	private Labirinto labirinto;
-	private Giocatore giocatore;
-	
-	public Partita(){
-		this.giocatore = new Giocatore();
-		this.labirinto = new Labirinto();
-		this.labirinto.creaStanze();
-		this.finita = false;
-	}
+    private Labirinto labirinto;
+    private Giocatore giocatore;
+    private boolean finita;
+
+    // NUOVO COSTRUTTORE
+    public Partita(Labirinto labirinto) {
+        this.labirinto = labirinto;
+        this.giocatore = new Giocatore();
+        this.finita = false;
+    }
 	public Stanza getStanzaCorrente() {
 	    return this.labirinto.getStanzaCorrente();
-	}
+	} 
 
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 	    this.labirinto.setStanzaCorrente(stanzaCorrente);

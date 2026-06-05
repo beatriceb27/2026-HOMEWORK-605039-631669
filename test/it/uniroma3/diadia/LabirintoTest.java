@@ -15,8 +15,7 @@ public class LabirintoTest {
 	
 	@BeforeEach
 	public void setUp() {
-		this.labirinto = new Labirinto();
-		this.labirinto.creaStanze();
+		this.labirinto = Labirinto.newBuilder().getLabirinto();
 		this.biblioteca = new Stanza("Biblioteca");
 		this.stanza = new Stanza("DS2");
 		this.atrio = new Stanza("Atrio");

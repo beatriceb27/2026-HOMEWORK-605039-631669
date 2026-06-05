@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.IOConsole;
 
 public class ComandoGuardaTest {
@@ -14,10 +15,10 @@ public class ComandoGuardaTest {
 
     @BeforeEach
     public void setUp() {
-        this.partita = new Partita();
+    	this.partita = new Partita(Labirinto.newBuilder().getLabirinto());
         this.comando = new ComandoGuarda();
-        this.comando.setIo(new IOConsole());
-    }
+        this.comando.setIo(new IOConsole(new java.util.Scanner("")));
+        }
 
     @Test
     public void testEsegui_NonModificaStatoPartita() {

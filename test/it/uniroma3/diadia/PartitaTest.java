@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
-
+import it.uniroma3.diadia.ambienti.Labirinto;
 public class PartitaTest {
     private Partita partita;
     private Stanza stanza;
@@ -13,8 +13,7 @@ public class PartitaTest {
 
     @BeforeEach
     public void setUp() {
-        this.partita = new Partita();
-		
+    	this.partita = new Partita(Labirinto.newBuilder().getLabirinto());		
 		this.stanza = new Stanza("Biblioteca");
     }
     

@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import java.util.Set;
 
 public class StanzaTest {
 	private Stanza stanza;
@@ -25,17 +27,16 @@ public class StanzaTest {
 		
 	}
 	
-	
 	@Test
-	public void testImpostaStanzaAdiacente_DirezioneVuota() {
-		assertNull(this.stanzaCentrale.getStanzaAdiacente("est"));
-	}
-	
-	@Test
-	public void testImpostaStanzaAdiacente_Nuova() {
-		this.stanzaCentrale.impostaStanzaAdiacente("nord", stanzaNord);
-		assertEquals(this.stanzaNord, this.stanzaCentrale.getStanzaAdiacente("nord"));
-	}
+    public void testImpostaStanzaAdiacente_DirezioneVuota() {
+        assertNull(this.stanzaCentrale.getStanzaAdiacente(Direzione.EST));
+    }
+
+    @Test
+    public void testImpostaStanzaAdiacente_Nuova() {
+        this.stanzaCentrale.impostaStanzaAdiacente(Direzione.NORD, stanzaNord);
+        assertEquals(this.stanzaNord, this.stanzaCentrale.getStanzaAdiacente(Direzione.NORD));
+    }
 	
 	@Test
 	public void testGetNome_StanzaCentrale() {
@@ -89,15 +90,19 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetDirezioni_StanzaIsolata() {
-		assertEquals(0, this.stanza.getDirezioni().length);
+		assertEquals(0, this.stanza.getDirezioni().size());
 	}
 	
 	@Test
-	public void testGetDirezioni_Stanza() {
-		this.stanza.impostaStanzaAdiacente("est", stanzaCentrale);
-		String[] direzioni = this.stanza.getDirezioni();
-		assertEquals("est", direzioni[0]);
-	}
+    public void testGetDirezioni_Stanza() {
+        this.stanza.impostaStanzaAdiacente(Direzione.EST, stanzaCentrale);
+        
+        Set<Direzione> direzioni = this.stanza.getDirezioni();
+        
+        assertEquals(1, direzioni.size());
+        
+        assertTrue(direzioni.contains(Direzione.EST));
+    }
 	
 	@Test 
 	public void testRemoveAttrezzo_LanternaDaStanza() {

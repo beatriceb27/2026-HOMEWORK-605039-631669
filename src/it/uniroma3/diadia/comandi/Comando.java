@@ -10,4 +10,5 @@ public interface Comando {
 	    public String getNome();
 	    public String getParametro();
 	    public void setIo(IO io);
+	    public IO getIo();
 }

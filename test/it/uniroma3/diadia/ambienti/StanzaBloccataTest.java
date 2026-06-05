@@ -15,37 +15,31 @@ public class StanzaBloccataTest {
 
     @BeforeEach
     public void setUp() {
-        this.stanza = new StanzaBloccata("Prigione", "nord", "chiave");
-        
+        this.stanza = new StanzaBloccata("Prigione", Direzione.NORD, "chiave");
         this.stanzaAdiacenteNord = new Stanza("Libertà");
         this.stanzaAdiacenteSud = new Stanza("Bagno");
-        
-        this.stanza.impostaStanzaAdiacente("nord", this.stanzaAdiacenteNord);
-        this.stanza.impostaStanzaAdiacente("sud", this.stanzaAdiacenteSud);
-        
+
+        this.stanza.impostaStanzaAdiacente(Direzione.NORD, this.stanzaAdiacenteNord);
+        this.stanza.impostaStanzaAdiacente(Direzione.SUD, this.stanzaAdiacenteSud);
         this.chiave = new Attrezzo("chiave", 1);
     }
 
     @Test
     public void testGetStanzaAdiacente_DirezioneBloccata_SenzaChiave() {
-        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente("nord");
-        
+        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente(Direzione.NORD);
         assertEquals(this.stanza, stanzaRestituita);
     }
 
     @Test
     public void testGetStanzaAdiacente_DirezioneBloccata_ConChiave() {
         this.stanza.addAttrezzo(this.chiave);
-        
-        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente("nord");
-        
+        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente(Direzione.NORD);
         assertEquals(this.stanzaAdiacenteNord, stanzaRestituita);
     }
 
     @Test
     public void testGetStanzaAdiacente_DirezioneLibera() {
-        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente("sud");
-        
+        Stanza stanzaRestituita = this.stanza.getStanzaAdiacente(Direzione.SUD);
         assertEquals(this.stanzaAdiacenteSud, stanzaRestituita);
     }
 }

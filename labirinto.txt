@@ -1,0 +1,15 @@
+Stanze:
+Atrio
+Biblioteca
+N10
+Estremi:
+Atrio
+Biblioteca
+Attrezzi:
+osso 5 N10
+lanterna 3 Atrio
+Uscite:
+Atrio nord Biblioteca
+Biblioteca sud Atrio
+Atrio est N10
+N10 ovest Atrio

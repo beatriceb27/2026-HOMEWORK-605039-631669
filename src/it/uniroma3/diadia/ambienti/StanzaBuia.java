@@ -5,7 +5,7 @@ public class StanzaBuia extends Stanza {
     private String attrezzoLuminoso;
 
     public StanzaBuia(String nome, String attrezzoLuminoso) {
-        super(nome); // Chiama il costruttore della classe padre (Stanza)
+        super(nome); 
         this.attrezzoLuminoso = attrezzoLuminoso;
     }
 
